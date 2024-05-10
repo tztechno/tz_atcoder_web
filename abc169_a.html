@@ -50,7 +50,7 @@
         methods: {
             calculate: function() {
                 var numbers = this.inputNumbers.split(' ').map(Number);
-                this.ans = numbers.reduce((acc, curr) => acc * curr, 0);
+                this.ans = numbers.reduce((acc, curr) => acc * curr, 1);
                 this.showResult = true; // 計算結果を表示する
             }
         }
