@@ -40,9 +40,11 @@
                     if (!isNaN(num)) {
                         const M = Math.floor(Math.sqrt(num));
                         const ANS = M * M;
-                        this.output = `INPUT: ${num}<br>OUTPUT: ${ANS}`;
+                        // 改行を含む配列を作成
+                        this.output = [`INPUT: ${num}`, `OUTPUT: ${ANS}`];
                     } else {
-                        this.output = 'Please enter a valid number.';
+                        this.output = ['Please enter a valid number.'];
+                    }
                     }
                 }
             }
