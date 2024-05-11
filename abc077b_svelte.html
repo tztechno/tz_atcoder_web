@@ -1,0 +1,31 @@
+<script>
+  let N;
+  let output = '';
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const num = parseInt(N);
+
+    if (!isNaN(num)) {
+      const M = Math.floor(Math.sqrt(num));
+      const ANS = M * M;
+      output = `INPUT: ${num}\nOUTPUT: ${ANS}`;
+    } else {
+      output = 'Please enter a valid number.';
+    }
+  }
+</script>
+
+<h1>abc077b</h1>
+<p>
+    N以下の平方数のうち、最大のものを求めてください。ただし、平方数とは、ある整数の2乗として表せる整数のことを指します。
+</p>
+
+<form on:submit|preventDefault={handleSubmit}>
+    <label for="N">Enter N:</label>
+    <input type="text" bind:value={N} required>
+    <br>
+    <input type="submit" value="Submit">
+</form>
+
+<p>{output}</p>
