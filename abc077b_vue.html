@@ -22,8 +22,7 @@
             <input type="submit" value="Submit">
         </form>
 
-        <!-- v-htmlディレクティブを使用してHTMLをレンダリング -->
-        <p v-if="output !== ''" id="output" v-html="output"></p>
+        <p v-if="output !== ''" id="output">{{ output }}</p>
     </div>
 
     <script>
@@ -41,8 +40,7 @@
                     if (!isNaN(num)) {
                         const M = Math.floor(Math.sqrt(num));
                         const ANS = M * M;
-                        // 改行を含むHTMLを作成
-                        this.output = `INPUT: ${num}  OUTPUT: ${ANS}`;
+                        this.output = `INPUT: ${num} \n OUTPUT: ${ANS}`;
                     } else {
                         this.output = 'Please enter a valid number.';
                     }
