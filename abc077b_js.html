@@ -24,9 +24,11 @@
     <script>
         document.getElementById('squareForm').addEventListener('submit', function (event) {
             event.preventDefault(); // Prevent default form submission
+            ////////////////
             var N = parseInt(document.getElementById('N').value); // Get the value of N from the input field
             var M = Math.floor(Math.sqrt(N)); // Calculate the square root of N
             var ANS = M * M; // Calculate the largest square number less than or equal to N
+            ////////////////            
             document.getElementById('output').innerText = "INPUT: " + N + "\nOUTPUT: " + ANS; // Display the input and output
         });
     </script>
