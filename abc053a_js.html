@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>abc077b</title>
+</head>
+
+<body>
+    <h1>abc053a</h1>
+    <p>
+すめけくんは現在のレートが1200未満ならばAtCoderBeginnerContest(ABC)に、そうでなければAtCoderRegularContest(ARC)に参加することにしました。すめけくんの現在のレートxが与えられます。すめけくんが参加するコンテストがABCならばABCと、そうでなければARCと出力してください。
+    </p>
+    <form id="squareForm">
+        <label for="N">Enter your rate:</label>
+        <input type="text" name="N" id="N" required>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <p id="output"></p>
+
+    <script>
+        document.getElementById('squareForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent default form submission
+            var N = parseInt(document.getElementById('N').value); 
+            if (N<1200) {
+                ANS = "ABC"
+            } else {
+                ANS = "ARC"
+            } 
+            document.getElementById('output').innerText = "RATE: " + N + "\nCONTEST: " + ANS; 
+        });
+    </script>
+
+</body>
+
+</html>
