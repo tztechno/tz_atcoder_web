@@ -67,7 +67,6 @@ nano ~/.zshrc
 export SDKMAN_DIR="/Users/shun_ishii/.sdkman"
 [[ -s "/Users/shun_ishii/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/shun_ishii/.sdkman/bin/sdkman-init.sh"
 
-# environment paths　20201117
 export PATH="$PATH:$HOME/.local/bin"export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 
 ^G Get Help         ^O WriteOut         ^R Read File        ^Y Prev Pg          ^K Cut Text         ^C Cur Pos          
