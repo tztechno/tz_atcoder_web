@@ -24,16 +24,20 @@ v22.1.0
 10.7.0
 % nvm --version
 0.39.2
+
 -------------------------------------------------------
 [challenge]
 npm install -g @vue/cli
+
 -------------------------------------------------------
 [result]
 % vue --version
 zsh: command not found: vue
+
 -------------------------------------------------------
 % npm root -g 
 /Users/shun_ishii/.npm-global/lib/node_modules
+
 -------------------------------------------------------
 [challenge]
 npm cache clean --force
@@ -42,14 +46,17 @@ npm install -g @vue/cli
 exec $SHELL -l
 
 vue --version
+
 -------------------------------------------------------
 [result]
 % vue --version
 zsh: command not found: vue
+
 -------------------------------------------------------
 [challenge]
 npm config get prefix
 [result]/Users/shun_ishii/.npm-global
+
 -------------------------------------------------------
 nano ~/.zshrc
 [result]
@@ -64,14 +71,17 @@ export SDKMAN_DIR="/Users/shun_ishii/.sdkman"
 export PATH="$PATH:$HOME/.local/bin"export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 
 ^G Get Help         ^O WriteOut         ^R Read File        ^Y Prev Pg          ^K Cut Text         ^C Cur Pos          
-^X Exit             ^J Justify          ^W Where is         ^V Next Pg          ^U UnCut Text       ^T To Spell         
+^X Exit             ^J Justify          ^W Where is         ^V Next Pg          ^U UnCut Text       ^T To Spell      
+
 -------------------------------------------------------
 export PATH="$HOME/.npm-global/bin:$PATH"
 追加保存反映
 source ~/.zshrc
+
 -------------------------------------------------------
 npm uninstall -g @vue/cli
 npm install -g @vue/cli
+
 -------------------------------------------------------
 + @vue/cli@5.0.8
 added 851 packages from 500 contributors in 27.655s
@@ -79,15 +89,18 @@ added 851 packages from 500 contributors in 27.655s
 % vue --version
 @vue/cli 5.0.8
 [install success]
+
 -------------------------------------------------------
 vue create my-vue-app
 
 Vue CLI v5.0.8
 ? Please pick a preset: Default ([Vue 3] babel, eslint)
 ? Pick the package manager to use when installing dependencies: Yarn
+
 -------------------------------------------------------
  $ cd my-vue-app
  $ yarn serve
+ 
 -------------------------------------------------------
   App running at:
   - Local:   http://localhost:8080/ 
@@ -95,6 +108,7 @@ Vue CLI v5.0.8
 
   Note that the development build is not optimized.
   To create a production build, run yarn build.
+  
 -------------------------------------------------------
 -------------------------------------------------------
 [how to create my app]
@@ -103,7 +117,11 @@ src/components/ContestForm.vue
 書き換え
 src/App.vue
 npm run build
+
 -------------------------------------------------------
+
+# deploy resulted in failure
+
 -------------------------------------------------------
 -------------------------------------------------------
 -------------------------------------------------------
