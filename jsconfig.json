@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    }
+  },
+  "include": [
+    "pages/**/*",
+    "components/**/*",
+    "lib/**/*"
+  ] // appディレクトリへの参照を削除
+}
