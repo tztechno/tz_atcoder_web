@@ -1,4 +1,4 @@
-＃ svelte
+# svelte
  
 ### App.svelteの全面書き換え、だけ
 
