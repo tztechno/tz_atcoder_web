@@ -1,8 +1,13 @@
 # svelte
  
-### App.svelteの全面書き換え、だけ
+### App.svelte の全面書き換えonly
 
 ```
+<h1>abc053a</h1>
+<p>
+    すめけくんは現在のレートが1200未満ならばAtCoderBeginnerContest(ABC)に、そうでなければAtCoderRegularContest(ARC)に参加することにしました。すめけくんの現在のレートxが与えられます。すめけくんが参加するコンテストがABCならばABCと、そうでなければARCと出力してください。
+</p>
+
 <script>
     let rate = 1200;
 
@@ -14,15 +19,6 @@
     }
 </script>
 
-<style>
-    /* Add your styles here */
-</style>
-
-<h1>abc053a</h1>
-<p>
-    すめけくんは現在のレートが1200未満ならばAtCoderBeginnerContest(ABC)に、そうでなければAtCoderRegularContest(ARC)に参加することにしました。すめけくんの現在のレートxが与えられます。すめけくんが参加するコンテストがABCならばABCと、そうでなければARCと出力してください。
-</p>
-
 <form on:submit={handleSubmit}>
     <label for="N">Select your rate:</label>
     <input type="range" bind:value={rate} min="0" max="5000" required>
@@ -33,20 +29,15 @@
 
 <p id="output"></p>
 
-
 ```
 
 ### script part before
 ```
     <script>
-        // Get elements
         var slider = document.getElementById('N');
         var output = document.getElementById('rateValue');
-
-        // Display the default value
         output.innerHTML = slider.value;
 
-        // Update the current slider value (each time you drag the slider handle)
         slider.oninput = function () {
             output.innerHTML = this.value;
         };
