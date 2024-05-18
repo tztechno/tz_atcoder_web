@@ -43,7 +43,7 @@
         };
 
         document.getElementById('squareForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent default form submission
+            event.preventDefault();
             var N = parseInt(document.getElementById('N').value);
             var ANS;
             if (N < 1200) {
