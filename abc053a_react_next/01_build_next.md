@@ -14,9 +14,10 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 --------------------------------------------------
 
-(base) shun_ishii@shunnoMacBook-puro atc_react % node -v
+% node -v
 v20.9.0
-(base) shun_ishii@shunnoMacBook-puro atc_react % npm -v
+
+% npm -v
 10.1.0
 
 [node install completed]
