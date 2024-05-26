@@ -1,11 +1,14 @@
+
 ----------------------------------------
 npm install -g create-nuxt-app
+
 ----------------------------------------
 [result]
 + create-nuxt-app@5.0.0
 added 10 packages from 4 contributors, removed 18 packages and updated 364 packages in 54.801s
 ----------------------------------------
 create-nuxt-app my-nuxt-app
+
 ----------------------------------------
 ✨  Generating Nuxt.js project in my-nuxt-app
 ? Project name: my-nuxt-app
@@ -25,6 +28,7 @@ create-nuxt-app my-nuxt-app
 ? Development tools: (Press <space> to select, <a> to toggle all, <i> to invert selection)
 ? What is your GitHub username? tztechno
 ? Version control system: Git
+
 ----------------------------------------
 🎉  Successfully created project my-nuxt-app
 
@@ -41,11 +45,14 @@ create-nuxt-app my-nuxt-app
 ----------------------------------------
 ----------------------------------------
 resume from here for creating another app
+
 ----------------------------------------
 ----------------------------------------
 cd my-vuenuxt-app
+
 ----------------------------------------
 yarn dev
+
 ----------------------------------------
 yarn run v1.22.21
 $ nuxt
@@ -76,7 +83,9 @@ $ nuxt
 
 ℹ Waiting for file changes                                                                                     11:59:27 AM
 ℹ Memory usage: 143 MB (RSS: 289 MB)                                                                           11:59:27 AM
+
 ℹ Listening on: http://localhost:3000/       
+
 ----------------------------------------
 ----------------------------------------
 ----------------------------------------
