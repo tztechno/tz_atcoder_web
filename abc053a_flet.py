@@ -1,3 +1,7 @@
+# python xxxx.py
+# 課題：数字の表示がfloat
+# 
+
 import flet as ft
 
 def main(page: ft.Page):
