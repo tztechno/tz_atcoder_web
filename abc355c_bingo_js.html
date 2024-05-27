@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BINGO GAME</title>
+    <style>
+        .container {
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .board {
+            margin-top: 2rem;
+        }
+
+        .row {
+            display: flex;
+        }
+
+        .cell {
+            width: 50px;
+            height: 50px;
+            border: 1px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .red {
+            background-color: red;
+            color: white;
+        }
+
+        .button {
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>BINGO GAME</h1>
+        <button id="shuffleButton" class="button">SHUFFLE</button>
+        <div id="board" class="board"></div>
+    </div>
+
+    <script>
+        const board = [];
+        let shuffledNumbers = [];
+        let intervalId = null;
+        let currentIndex = 0;
+
+        function initializeBoard() {
+            board.length = 0;
+            let id = 1;
+            for (let row = 0; row < 5; row++) {
+                const rowData = [];
+                for (let col = 0; col < 5; col++) {
+                    rowData.push({
+                        id,
+                        value: id,
+                        isRed: false,
+                    });
+                    id++;
+                }
+                board.push(rowData);
+            }
+            renderBoard();
+        }
+
+        function renderBoard() {
+            const boardElement = document.getElementById('board');
+            boardElement.innerHTML = '';
+            board.forEach((row) => {
+                const rowElement = document.createElement('div');
+                rowElement.classList.add('row');
+                row.forEach((cell) => {
+                    const cellElement = document.createElement('div');
+                    cellElement.classList.add('cell');
+                    cellElement.textContent = cell.value;
+                    if (cell.isRed) {
+                        cellElement.classList.add('red');
+                    }
+                    rowElement.appendChild(cellElement);
+                });
+                boardElement.appendChild(rowElement);
+            });
+        }
+
+        function shuffleNumbers() {
+            resetGame();
+            shuffledNumbers = getShuffledNumbers();
+            startColorChangeInterval();
+        }
+
+        function getShuffledNumbers() {
+            const numbers = Array.from({ length: 25 }, (_, i) => i + 1);
+            for (let i = numbers.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+            }
+            return numbers;
+        }
+
+        function startColorChangeInterval() {
+            clearInterval(intervalId);
+            currentIndex = 0;
+            intervalId = setInterval(changeColor, 1000);
+        }
+
+        function changeColor() {
+            if (currentIndex < shuffledNumbers.length) {
+                const cellId = shuffledNumbers[currentIndex];
+                const cell = board.flat().find((c) => c.value === cellId);
+                if (cell) {
+                    cell.isRed = true;
+                    renderBoard();
+                    if (checkBingo()) {
+                        clearInterval(intervalId);
+                        return;
+                    }
+                }
+                currentIndex++;
+            } else {
+                clearInterval(intervalId);
+            }
+        }
+
+        function checkBingo() {
+            const flatBoard = board.flat();
+
+            // 行チェック
+            for (let i = 0; i < 5; i++) {
+                const row = flatBoard.slice(i * 5, i * 5 + 5);
+                if (row.every((cell) => cell.isRed)) {
+                    return true;
+                }
+            }
+
+            // 列チェック
+            for (let i = 0; i < 5; i++) {
+                const column = flatBoard.filter((cell, index) => index % 5 === i);
+                if (column.every((cell) => cell.isRed)) {
+                    return true;
+                }
+            }
+
+            // 対角線チェック
+            const diagonal1 = [];
+            const diagonal2 = [];
+
+            for (let i = 0; i < 25; i += 6) {
+                diagonal1.push(flatBoard[i]);
+            }
+
+            for (let i = 4; i < 21; i += 4) {
+                diagonal2.push(flatBoard[i]);
+            }
+
+            if (diagonal1.every((cell) => cell.isRed) || diagonal2.every((cell) => cell.isRed)) {
+                return true;
+            }
+
+            return false;
+        }
+
+        function resetGame() {
+            clearInterval(intervalId);
+            currentIndex = 0;
+            shuffledNumbers = [];
+            board.flat().forEach((cell) => {
+                cell.isRed = false;
+            });
+            renderBoard();
+        }
+
+        initializeBoard();
+
+        const shuffleButton = document.getElementById('shuffleButton');
+        shuffleButton.addEventListener('click', shuffleNumbers);
+    </script>
+</body>
+
+</html>
