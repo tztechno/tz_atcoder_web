@@ -1,6 +1,7 @@
-# python xxxx.py
-# 課題：数字の表示がfloat
-# 
+###
+### 実行：python xxxx.py
+### 課題：数字の表示がfloat
+### 
 
 import flet as ft
 
@@ -28,6 +29,6 @@ def main(page: ft.Page):
     rate.on_change = rate_changed
     rate_changed(None)
 
-#ft.app(target=main)
-
 ft.app(target=main, view=ft.AppView.WEB_BROWSER)
+
+### ft.app(target=main) # window が開く
