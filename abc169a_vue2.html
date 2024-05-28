@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js Example</title>
+    <!-- Vue.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@IshiiStpete" />
+    <meta name="twitter:title" content="Enter numbers to get result">
+    
+    <style>
+        #app {
+            text-align: center;
+            margin-top: 50px;
+        }
+        input {
+            width: 300px; /* 入力ボックスの横幅を調整 */
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <h1>{{ message }}</h1>
+    <input v-model.trim="inputNumbers" placeholder="Input numbers with space">
+    <button @click="calculate">Run</button> <!-- 計算ボタンを追加 -->
+    <p v-if="showResult">Result: {{ ans }}</p> <!-- 計算結果を表示するための要素 -->
+</div>
+
+<script src="component0.js" async></script>
+
+</script>
+
+</body>
+</html>
+
+
