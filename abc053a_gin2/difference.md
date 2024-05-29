@@ -1,5 +1,36 @@
 # difference
-
+---
+logic in go
+```
+    router.POST("/", func(c *gin.Context) {
+        rateStr := c.PostForm("N")
+        rate, err := strconv.Atoi(rateStr)
+        if err != nil {
+            rate = 1200
+        }
+        contest := "ARC"
+        if rate < 1200 {
+            contest = "ABC"
+        }
+        c.HTML(http.StatusOK, "index.tmpl", gin.H{
+            "Rate":    rate,
+            "Contest": contest,
+        })
+    })
+```
+logic in js
+```
+        document.getElementById('squareForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent default form submission
+            var N = parseInt(document.getElementById('N').value);
+            var ANS;
+            if (N < 1200) {
+                ANS = "ABC";
+            } else {
+                ANS = "ARC";
+            }
+            document.getElementById('output').innerText = "RATE: " + N + "\nCONTEST: " + ANS;
+```
 ---
 main.go after
 ```
@@ -12,18 +43,18 @@ func main() {
         c.HTML(http.StatusOK, "index.tmpl", nil)
     })
 
+//router.POST全体が追加された
+
     router.POST("/", func(c *gin.Context) {
         rateStr := c.PostForm("N")
         rate, err := strconv.Atoi(rateStr)
         if err != nil {
             rate = 1200
         }
-
         contest := "ARC"
         if rate < 1200 {
             contest = "ABC"
         }
-
         c.HTML(http.StatusOK, "index.tmpl", gin.H{
             "Rate":    rate,
             "Contest": contest,
@@ -38,16 +69,7 @@ main.go before
 func main() {
     r := gin.Default()
 
-    // HTMLテンプレートのロード
     r.LoadHTMLGlob("templates/*")
-
-    // ルートURLにアクセスするとHTMLを提供するエンドポイント
-    r.GET("/", func(c *gin.Context) {
-        // HTMLテンプレートをレンダリングしてクライアントに送信
-        c.HTML(200, "index.tmpl", gin.H{
-            "title": "Main website",
-        })
-    })
 
     r.GET("/index", func(c *gin.Context) {
         c.HTML(200, "index.tmpl", gin.H{
