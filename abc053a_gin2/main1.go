@@ -18,11 +18,5 @@ func main() {
         })
     })
 
-    r.GET("/index", func(c *gin.Context) {
-        c.HTML(200, "index.tmpl", gin.H{
-            "title": "Main website",
-        })
-    })
-
     r.Run() // デフォルトでは ":8080" でリッスン
 }
