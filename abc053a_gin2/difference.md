@@ -87,7 +87,7 @@ index.tmpl before
             output.innerHTML = this.value;
         };
 
-// to be transfered to main.go
+// this logic to be transfered to main.go
 
         document.getElementById('squareForm').addEventListener('submit', function (event) {
             event.preventDefault(); // Prevent default form submission
