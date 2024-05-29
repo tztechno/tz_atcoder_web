@@ -23,12 +23,10 @@ func main() {
         if err != nil {
             rate = 1200
         }
-
         contest := "ARC"
         if rate < 1200 {
             contest = "ABC"
         }
-
         c.HTML(http.StatusOK, "index.tmpl", gin.H{
             "Rate":    rate,
             "Contest": contest,
