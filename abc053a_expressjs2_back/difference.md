@@ -12,7 +12,8 @@
 
 ```
 ---
-server.js after 
+### server.js after 
+### AJAXを使った非同期サーバーサイド処理（AJAX: Asynchronous JavaScript and XML）に相当する
 ```
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -39,7 +40,7 @@ app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
 ```
-server.js before
+### server.js before
 ```
 const express = require('express');
 const path = require('path');
@@ -60,7 +61,7 @@ app.listen(port, () => {
 });
 ```
 ---
-index.html after
+### index.html after
 ```
     <script>
         // Get elements
@@ -96,7 +97,7 @@ index.html after
         });
     </script>
 ```
-index.html before
+### index.html before
 ```
     <script>
         // Get elements
