@@ -1,4 +1,4 @@
-
+### 
 
 Express.jsを使ってバックエンドで処理するように変更しましょう。まず、フロントエンドのスクリプトをバックエンドに移し、フロントエンドとバックエンドが通信できるようにします。次に、Expressサーバーをセットアップし、POSTリクエストを受け取って適切なレスポンスを返すルートを作成します。
 
@@ -6,8 +6,8 @@ index.htmlを更新して、JavaScriptからバックエンドにPOSTリクエ�
 server.jsファイルを作成してExpressサーバーをセットアップし、POSTリクエストを処理するエンドポイントを追加します。
 以下は、これを実現するためのコードです。
 
-フロントエンド（index.html）
-
+### フロントエンド（index.html）
+```
 <!DOCTYPE html>
 <html lang="en">
 
@@ -69,8 +69,9 @@ server.jsファイルを作成してExpressサーバーをセットアップし�
 </body>
 
 </html>
-バックエンド（server.js）
-
+```
+### バックエンド（server.js）
+```
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -95,29 +96,31 @@ app.post('/rate', (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
-手順
+```
+### 手順
 フロントエンドのHTMLファイルをpublicディレクトリに保存します。例: public/index.html
 バックエンドのコードをserver.jsとして保存します。
 Node.jsとnpmがインストールされていることを確認し、プロジェクトのディレクトリで以下のコマンドを実行してExpressとbody-parserをインストールします:
-
+```
 cd my-express-app
 npm init -y
 npm install express body-parser
 サーバーを起動します:
-
 cd my-express-app
 node server.js
-
+```
 
 ブラウザで http://localhost:3000 を開きます。
 これで、スライダーの値を変更してフォームを送信すると、バックエンドで処理された結果が表示されます。
 
+### 階層
+```
 my-express-app/
 ├── public/
 │   └── index.html
 ├── server.js
 └── package.json
-
+```
 
 
 
