@@ -1,6 +1,14 @@
 
 ### difference
 
+---
+### Backend型: 従来型サーバーサイドレンダリング（Traditional Server-Side Rendering）
+
+サーバーサイドでHTMLを生成し、全ページをリロードする。
+
+### Frontend型: 非同期サーバーサイド処理（AJAX）または非同期通信（Asynchronous Communication）
+
+フォーム送信時にJavaScriptを使って非同期にサーバーサイドの処理を行い、部分的にページを更新する。
 
 ---
 ### 従来型サーバーサイドレンダリング
