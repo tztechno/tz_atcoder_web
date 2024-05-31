@@ -45,3 +45,9 @@ npm run start
 
 http://localhost:3000
 ```
+### error内容
+
+```
+RATE: 2676
+CONTEST: {"message":"Cannot POST /rate","error":"Not Found","statusCode":404}
+```
