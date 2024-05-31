@@ -1,10 +1,12 @@
 
 
 ---
+
 django-admin startproject myproj
 cd myproj
 python manage.py startapp myapp
 子のmyprojとmyappが並列
+
 ---
 python manage.py migrate
 python manage.py runserver
