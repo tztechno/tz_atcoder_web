@@ -10,7 +10,7 @@ http://localhost:3000
 --------------------------
 
 # myappデプロイ
-
+```
 npm install @fastify/static
 
 project-root
@@ -26,7 +26,7 @@ server.jsの修正
 node server.js
 
 http://localhost:3000
-
+```
 ----
 
 # AJAX導入
