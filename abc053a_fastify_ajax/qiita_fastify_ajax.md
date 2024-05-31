@@ -8,8 +8,8 @@
 - FastifyはAPIサーバーの構築に非常に適した高性能なNode.jsフレームワークです。
 - AJAXとは、Asynchronous JavaScript and XMLの略称で、Web アプリケーションでデータを非同期的に転送する通信手法のことを指します。
 
-## 2. プロジェクトの目的:
-AJAX設置例として、StandAloneのHTML（元html）を、Fastify上にdeployし、さらにscript内のlogicをAJAXを用いてbackendに分離移行することをChatGPTに相談しつつ実行できたので、その過程および内容についてまとめます。
+## 2. 内容:
+AJAX設置例として、StandAloneのHTML（元html）を、Fastify上にdeployし、さらにスクリプト内のロジックをAJAXを用いてbackendに分離移行することをcGPTに相談しつつ実現できたので、その過程・内容についてまとめます。
 
 内容はAtcoder ABC053a の設問を簡易なwebアプリにしたもの。
 
@@ -75,10 +75,10 @@ AJAX設置例として、StandAloneのHTML（元html）を、Fastify上にdeploy
 </html>
 ```
 ## 3. Fastify上にdeployした状態
-#### public/index.html 
+### public/index.html 
 元htmlをpublic/index.htmlにそのままコピペするだけ。
 
-#### server.js
+### server.js
 ```
 // server.js
 const fastify = require('fastify')({ logger: true })
@@ -107,7 +107,7 @@ start()
 ```
 
 ## 3. フロントエンドに書かれたロジックを AJAX を用いてバックエンドに移行
-#### public/index.html
+### public/index.html
 ```
     <script>
         // Get elements
@@ -125,6 +125,7 @@ start()
         document.getElementById('squareForm').addEventListener('submit', function (event) {
             event.preventDefault(); // Prevent default form submission
             var N = parseInt(document.getElementById('N').value);
+       ///////////////////サーバーとの送受信をメソッドを記載///////////////////////////////
        ////////////////////HTTP POSTメソッドを使用し値をrateというキーで送信。//////////////
             // Make an AJAX request to the backend
             fetch('/api/getContest', {
@@ -134,17 +135,17 @@ start()
                 },
                 body: JSON.stringify({ rate: N })
             })
-        /////////////////////////サーバーからの応答をJSON形式にパース/////////////////////
+        /////////////////////////サーバーからの応答をJSON形式にパース///////////////////////
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('output').innerText = "RATE: " + data.rate + "\nCONTEST: " + data.contest;
                 })
                 .catch(error => console.error('Error:', error));
-         ////////////////////////////////////////////////////////////////////
+         //////////////////////////////////////////////////////////////////////////////
         });
     </script>
 ```
-#### server.js
+### server.js
 ```
 // server.js
 const fastify = require('fastify')({ logger: true })
