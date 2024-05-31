@@ -6,11 +6,10 @@
 ## 1. Fastify、AJAX とは 
 
 - FastifyはAPIサーバーの構築に非常に適した高性能なNode.jsフレームワークです。
-
 - AJAXとは、Asynchronous JavaScript and XMLの略称で、Web アプリケーションでデータを非同期的に転送する通信手法のことを指します。
 
 ## 2. プロジェクトの目的:
-AJAX設置例として、StandAloneのHTML（元html）を、Fastify上にdeployし、さらにscript内のlogicをAJAXを用いてbackendに分離移行する過程を示す。
+AJAX設置例として、StandAloneのHTML（元html）を、Fastify上にdeployし、さらにscript内のlogicをAJAXを用いてbackendに分離移行することをChatGPTに相談しつつ実行できたので、その過程および内容についてまとめます。
 
 内容はAtcoder ABC053a の設問を簡易なwebアプリにしたもの。
 
@@ -64,8 +63,8 @@ AJAX設置例として、StandAloneのHTML（元html）を、Fastify上にdeploy
             } else {
                 ANS = "ARC";
             }
-            document.getElementById('output').innerText = "RATE: " + N + "\nCONTEST: " + ANS;
        ////////////////////////////////////////////////////////////////////////////////////////////
+            document.getElementById('output').innerText = "RATE: " + N + "\nCONTEST: " + ANS;
 
         });
 
@@ -77,7 +76,7 @@ AJAX設置例として、StandAloneのHTML（元html）を、Fastify上にdeploy
 ```
 ## 3. Fastify上にdeployした状態
 #### public/index.html 
-元htmlをそのままコピペする。
+元htmlをpublic/index.htmlにそのままコピペするだけ。
 
 #### server.js
 ```
@@ -86,13 +85,13 @@ const fastify = require('fastify')({ logger: true })
 const path = require('path')
 const fastifyStatic = require('@fastify/static')
 
-/////////////////元server.jsに対してこの部分が追加される////////////////////
+/////////////////元server.jsに対してpublic/index.html設置に伴いこの部分が追加される////////////////////
 // Register the static plugin
 fastify.register(fastifyStatic, {
     root: path.join(__dirname, 'public'),
     prefix: '/', // optional: default '/'
 })
-///////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Start the server
 const start = async () => {
@@ -107,7 +106,7 @@ const start = async () => {
 start()
 ```
 
-## 3. script内のlogicをAJAXを用いてbackendに分離
+## 3. フロントエンドに書かれたロジックを AJAX を用いてバックエンドに移行
 #### public/index.html
 ```
     <script>
@@ -126,7 +125,7 @@ start()
         document.getElementById('squareForm').addEventListener('submit', function (event) {
             event.preventDefault(); // Prevent default form submission
             var N = parseInt(document.getElementById('N').value);
-
+       ////////////////////HTTP POSTメソッドを使用し値をrateというキーで送信。//////////////
             // Make an AJAX request to the backend
             fetch('/api/getContest', {
                 method: 'POST',
@@ -135,11 +134,13 @@ start()
                 },
                 body: JSON.stringify({ rate: N })
             })
+        /////////////////////////サーバーからの応答をJSON形式にパース/////////////////////
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('output').innerText = "RATE: " + data.rate + "\nCONTEST: " + data.contest;
                 })
                 .catch(error => console.error('Error:', error));
+         ////////////////////////////////////////////////////////////////////
         });
     </script>
 ```
