@@ -131,6 +131,7 @@ start()
         document.getElementById('squareForm').addEventListener('submit', function (event) {
             event.preventDefault(); // Prevent default form submission
             var N = parseInt(document.getElementById('N').value);
+
        ///////////////////サーバーとの送受信をメソッドを記載///////////////////////////////
        ////////////////////HTTP POSTメソッドを使用し値をrateというキーで送信。//////////////
             // Make an AJAX request to the backend
@@ -148,6 +149,7 @@ start()
                 })
                 .catch(error => console.error('Error:', error));
          //////////////////////////////////////////////////////////////////////////////
+
         });
     </script>
 ```
