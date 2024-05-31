@@ -75,8 +75,14 @@ AJAX設置例として、StandAloneのHTML（元html）を、Fastify上にdeploy
 </html>
 ```
 ## 3. Fastify上にdeployした状態
-### public/index.html 
-元htmlをpublic/index.htmlにそのままコピペするだけ。
+### 階層構造
+```
+project-root
+├── public
+│   └── index.html　　: 元htmlをそのままコピペするだけ。
+├── server.js
+├── package.json
+```
 
 ### server.js
 ```
