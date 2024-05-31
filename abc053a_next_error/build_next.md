@@ -1,3 +1,4 @@
+
 ```
 npm install -g @nestjs/cli
 nest new myapp
@@ -45,6 +46,16 @@ npm run start
 
 http://localhost:3000
 ```
+
+### app向け新規ファイルの階層
+
+├── pubkic/
+│   └── index.html
+├── src/
+│   └── rate 
+│        ├── rate.controller.ts
+│        └── rate.service.ts
+
 ### error内容
 
 ```
