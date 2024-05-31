@@ -3,19 +3,16 @@
 # Fastify+AJAX を用いてHTMLのscript内のlogicをbackendに移行するプロセス
 ### 
 
-### 1. Fastify とは、AJAX とは 
-#### Fastify 
-FastifyはAPIサーバーの構築に非常に適した高性能なNode.jsフレームワークです。
-#### AJAX 
-AJAXとは、Asynchronous JavaScript and XMLの略称で、Web アプリケーションでデータを非同期的に転送する通信手法のことを指します。
+### 1. Fastify、AJAX とは 
+
+- FastifyはAPIサーバーの構築に非常に適した高性能なNode.jsフレームワークです。
+
+- AJAXとは、Asynchronous JavaScript and XMLの略称で、Web アプリケーションでデータを非同期的に転送する通信手法のことを指します。
 
 ### 2. プロジェクトの目的:
-AJAX設置の練習として、StandAloneのHTML（元html）を、Fastify上にdeployし、さらにscript内のlogicをAJAXを用いてbackendに分離移行する過程を示す。
+AJAX設置例として、StandAloneのHTML（元html）を、Fastify上にdeployし、さらにscript内のlogicをAJAXを用いてbackendに分離移行する過程を示す。
 内容は、Atcoder ABC053a を簡易なwebアプリにしたもの。
-
-### 3. Fastify上にdeployした状態
-#### public/index.html 
-元htmlをそのままコピペしたもの
+### 元htmlの全体像
 ```
 <!DOCTYPE html>
 <html lang="en">
@@ -23,17 +20,17 @@ AJAX設置の練習として、StandAloneのHTML（元html）を、Fastify上に
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>abc077b</title>
+    <title>abc053a</title>
 </head>
 
 <body>
     <h1>abc053a</h1>
     <p>
-        すめけくんは現在のレートが1200未満ならばAtCoderBeginnerContest(ABC)に、そうでなければAtCoderRegularContest(ARC)に参加することにしました。すめけくんの現在のレートxが与えられます。すめけくんが参加するコンテストがABCならばABCと、そうでなければARCと出力してください。
+        現在のレートxの時、参加するコンテスト（ABC/ARC）を出力する。
     </p>
     <form id="squareForm">
         <label for="N">Select your rate:</label>
-        <input type="range" name="N" id="N" min="0" max="5000" value="1200" required>
+        <input type="range" name="N" id="N" min="0" max="4000" value="1200" required>
         <span id="rateValue">1200</span> <!-- Span to display selected value -->
         <br>
         <input type="submit" value="Submit">
@@ -70,6 +67,44 @@ AJAX設置の練習として、StandAloneのHTML（元html）を、Fastify上に
 </body>
 
 </html>
+```
+### 3. Fastify上にdeployした状態
+#### public/index.html 
+元htmlをそのままコピペしたもの。formとscriptを示す。
+```
+    <form id="squareForm">
+        <label for="N">Select your rate:</label>
+        <input type="range" name="N" id="N" min="0" max="4000" value="1200" required>
+        <span id="rateValue">1200</span> <!-- Span to display selected value -->
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        // Get elements
+        var slider = document.getElementById('N');
+        var output = document.getElementById('rateValue');
+
+        // Display the default value
+        output.innerHTML = slider.value;
+
+        // Update the current slider value (each time you drag the slider handle)
+        slider.oninput = function () {
+            output.innerHTML = this.value;
+        };
+
+        document.getElementById('squareForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent default form submission
+            var N = parseInt(document.getElementById('N').value);
+            var ANS;
+            if (N < 1200) {
+                ANS = "ABC";
+            } else {
+                ANS = "ARC";
+            }
+            document.getElementById('output').innerText = "RATE: " + N + "\nCONTEST: " + ANS;
+        });
+    </script>
 ```
 #### server.js
 before
@@ -121,29 +156,13 @@ start()
 ### 3. script内のlogicをAJAXを用いてbackendに分離
 #### public/index.html
 ```
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>abc077b</title>
-</head>
-
-<body>
-    <h1>abc053a</h1>
-    <p>
-        すめけくんは現在のレートが1200未満ならばAtCoderBeginnerContest(ABC)に、そうでなければAtCoderRegularContest(ARC)に参加することにしました。すめけくんの現在のレートxが与えられます。すめけくんが参加するコンテストがABCならばABCと、そうでなければARCと出力してください。
-    </p>
     <form id="squareForm">
         <label for="N">Select your rate:</label>
-        <input type="range" name="N" id="N" min="0" max="5000" value="1200" required>
+        <input type="range" name="N" id="N" min="0" max="4000" value="1200" required>
         <span id="rateValue">1200</span> <!-- Span to display selected value -->
         <br>
         <input type="submit" value="Submit">
     </form>
-
-    <p id="output"></p>
 
     <script>
         // Get elements
@@ -177,10 +196,6 @@ start()
                 .catch(error => console.error('Error:', error));
         });
     </script>
-
-</body>
-
-</html>
 ```
 #### server.js
 ```
