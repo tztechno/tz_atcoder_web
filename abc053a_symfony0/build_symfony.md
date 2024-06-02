@@ -1,3 +1,4 @@
+installする
 ```
 cd myapp
 composer create-project symfony/website-skeleton .
