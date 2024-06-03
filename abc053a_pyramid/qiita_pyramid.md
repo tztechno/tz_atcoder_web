@@ -60,12 +60,14 @@ set about.jinja2(表示したいhtmlを丸ごとコピー、　script部分を�
         document.getElementById('squareForm').addEventListener('submit', function (event) {
             event.preventDefault(); // Prevent default form submission
             var N = parseInt(document.getElementById('N').value);
+        #######################移管する予定のlogic#########################
             var ANS;
             if (N < 1200) {
                 ANS = "ABC";
             } else {
                 ANS = "ARC";
             }
+        #######################移管する予定のlogic#########################
             document.getElementById('output').innerText = "RATE: " + N + "\nCONTEST: " + ANS;
         });
     </script>
@@ -122,6 +124,7 @@ def hello_world(request):
 def about(request):
     return {}
 
+##########################移管されたlogic部分###############################
 @view_config(route_name='check_rate', renderer='json')
 def check_rate(request: Request):
     try:
@@ -133,6 +136,7 @@ def check_rate(request: Request):
         return {'result': ANS}
     except KeyError:
         return HTTPBadRequest(json={'error': 'Invalid request payload'})
+##########################移管されたlogic部分#################################
 
 if __name__ == '__main__':
     with Configurator() as config:
@@ -168,7 +172,8 @@ logicが抜かれたabout.jinja2のscript部分
     document.getElementById('squareForm').addEventListener('submit', function (event) {
         event.preventDefault(); // Prevent default form submission
         var N = parseInt(document.getElementById('N').value);
-        
+
+        #########################サーバーとの送受信#########################
         // Send the data to the server
         fetch('/check_rate', {
             method: 'POST',
@@ -185,6 +190,7 @@ logicが抜かれたabout.jinja2のscript部分
         .catch((error) => {
             console.error('Error:', error);
         });
+        #########################サーバーとの送受信#########################
     });
 </script>
 ```
