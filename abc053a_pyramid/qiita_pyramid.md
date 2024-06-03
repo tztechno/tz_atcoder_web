@@ -108,6 +108,47 @@ http://0.0.0.0:6543/about
 ```
 ---
 ## step2: logic transfered to backend
+
+logicが抜かれたabout.jinja2のscript部分
+```
+<script>
+    // Get elements
+    var slider = document.getElementById('N');
+    var output = document.getElementById('rateValue');
+
+    // Display the default value
+    output.innerHTML = slider.value;
+
+    // Update the current slider value (each time you drag the slider handle)
+    slider.oninput = function () {
+        output.innerHTML = this.value;
+    };
+
+    document.getElementById('squareForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent default form submission
+        var N = parseInt(document.getElementById('N').value);
+
+        #########################サーバーとの送受信#########################
+        // Send the data to the server
+        fetch('/check_rate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ N: N }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Update the output based on the server's response
+            document.getElementById('output').innerText = "RATE: " + N + "\nCONTEST: " + data.result;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+        #########################サーバーとの送受信#########################
+    });
+</script>
+```
 logicを含むapp.py
 ```
 from wsgiref.simple_server import make_server
@@ -154,44 +195,3 @@ if __name__ == '__main__':
     print("Serving on http://0.0.0.0:6543")
     server.serve_forever()
 ```
-logicが抜かれたabout.jinja2のscript部分
-```
-<script>
-    // Get elements
-    var slider = document.getElementById('N');
-    var output = document.getElementById('rateValue');
-
-    // Display the default value
-    output.innerHTML = slider.value;
-
-    // Update the current slider value (each time you drag the slider handle)
-    slider.oninput = function () {
-        output.innerHTML = this.value;
-    };
-
-    document.getElementById('squareForm').addEventListener('submit', function (event) {
-        event.preventDefault(); // Prevent default form submission
-        var N = parseInt(document.getElementById('N').value);
-
-        #########################サーバーとの送受信#########################
-        // Send the data to the server
-        fetch('/check_rate', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ N: N }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Update the output based on the server's response
-            document.getElementById('output').innerText = "RATE: " + N + "\nCONTEST: " + data.result;
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-        #########################サーバーとの送受信#########################
-    });
-</script>
-```
-
