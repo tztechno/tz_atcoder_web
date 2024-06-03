@@ -6,7 +6,7 @@ pyramidでwebページを作る
 ```
 pip install pyramid
 ```
-set app.py
+set initial app.py
 ```
 from wsgiref.simple_server import make_server
 from pyramid.config import Configurator
@@ -34,7 +34,7 @@ http://0.0.0.0:6543
 ```
 pip install pyramid_jinja2
 ```
-hello.jinja2 and about.jinja2(abc053a.htmlをそのままコピー)
+set hello.jinja2
 ```
 <html>
 <body>
@@ -42,7 +42,35 @@ hello.jinja2 and about.jinja2(abc053a.htmlをそのままコピー)
 </body>
 </html>
 ```
-app.py
+set about.jinja2(表示したいhtmlを丸ごとコピー、　script部分を示す)
+```
+    <script>
+        // Get elements
+        var slider = document.getElementById('N');
+        var output = document.getElementById('rateValue');
+
+        // Display the default value
+        output.innerHTML = slider.value;
+
+        // Update the current slider value (each time you drag the slider handle)
+        slider.oninput = function () {
+            output.innerHTML = this.value;
+        };
+
+        document.getElementById('squareForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent default form submission
+            var N = parseInt(document.getElementById('N').value);
+            var ANS;
+            if (N < 1200) {
+                ANS = "ABC";
+            } else {
+                ANS = "ARC";
+            }
+            document.getElementById('output').innerText = "RATE: " + N + "\nCONTEST: " + ANS;
+        });
+    </script>
+```
+set app.py
 ```
 from wsgiref.simple_server import make_server
 from pyramid.config import Configurator
@@ -71,9 +99,93 @@ if __name__ == '__main__':
     print("Serving on http://0.0.0.0:6543")
     server.serve_forever()
 ```
+```
 python app.py
 http://0.0.0.0:6543
 http://0.0.0.0:6543/about
-
+```
 ---
 ## step2: logic transfered to backend
+logicを含むapp.py
+```
+from wsgiref.simple_server import make_server
+from pyramid.config import Configurator
+from pyramid.view import view_config
+from pyramid.request import Request
+from pyramid.httpexceptions import HTTPBadRequest
+
+@view_config(route_name='hello', renderer='templates/hello.jinja2')
+def hello_world(request):
+    return {'name': 'Pyramid'}
+
+@view_config(route_name='about', renderer='templates/about.jinja2')
+def about(request):
+    return {}
+
+@view_config(route_name='check_rate', renderer='json')
+def check_rate(request: Request):
+    try:
+        N = int(request.json['N'])
+        if N < 1200:
+            ANS = "ABC"
+        else:
+            ANS = "ARC"
+        return {'result': ANS}
+    except KeyError:
+        return HTTPBadRequest(json={'error': 'Invalid request payload'})
+
+if __name__ == '__main__':
+    with Configurator() as config:
+        config.include('pyramid_jinja2')
+        config.add_jinja2_renderer('.jinja2')
+        
+        config.add_route('hello', '/')
+        config.add_route('about', '/about')
+        config.add_route('check_rate', '/check_rate')  # check_rate ルートの追加        
+        config.scan()
+        
+        app = config.make_wsgi_app()
+    
+    server = make_server('0.0.0.0', 6543, app)
+    print("Serving on http://0.0.0.0:6543")
+    server.serve_forever()
+```
+logicが抜かれたabout.jinja2のscript部分
+```
+<script>
+    // Get elements
+    var slider = document.getElementById('N');
+    var output = document.getElementById('rateValue');
+
+    // Display the default value
+    output.innerHTML = slider.value;
+
+    // Update the current slider value (each time you drag the slider handle)
+    slider.oninput = function () {
+        output.innerHTML = this.value;
+    };
+
+    document.getElementById('squareForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent default form submission
+        var N = parseInt(document.getElementById('N').value);
+        
+        // Send the data to the server
+        fetch('/check_rate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ N: N }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Update the output based on the server's response
+            document.getElementById('output').innerText = "RATE: " + N + "\nCONTEST: " + data.result;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    });
+</script>
+```
+
