@@ -1,5 +1,5 @@
 
-# welcome - static 表示　-　backend 移管　の　3 steps 
+# welcome-static表示-backend移管 の3steps 
 
 ---
 ```
