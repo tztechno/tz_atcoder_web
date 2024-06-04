@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ABC079B Lucas数 JavaScript</title>
+<script>
+    function calculate() {
+        var n = document.getElementById('inputN').value;
+        var start_time = performance.now();
+
+        fetch('/lucas?n=' + n)
+            .then(response => response.json())
+            .then(data => {
+                var process_time = performance.now() - start_time;
+                document.getElementById('result').innerText = "Lucas数 L" + n + " = " + data.result;
+                document.getElementById('time').innerText = "処理時間: " + (process_time / 1000).toFixed(3) + "秒";
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+</script>
+</head>
+
+<body>
+    <h1>ABC079B Lucas数 JavaScript</h1>
+    Nを入力してください: <input type="number" id="inputN" min="1">
+    <button onclick="calculate()">計算実行</button>
+    <p id="result"></p>
+    <p id="time"></p>
+</body>
+
+</html>
