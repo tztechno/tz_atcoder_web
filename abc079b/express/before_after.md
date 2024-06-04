@@ -47,6 +47,9 @@ index.html after
         }
     </script>
 ```
+入力値をnという名前としてjsonでpost
+レスポンスをjsonで受け取る
+
 ---
 app.js before
 ```
@@ -102,10 +105,14 @@ form before
 <input type="number" id="inputN" min="1">
 <button onclick="calculate()">計算実行</button>
 ```
+クリックするとscriptのcalculate関数が実行される
+
 ---
 form after
 ```
 <input type="number" id="inputN" placeholder="Enter a number">
 <button onclick="sendRequest()">Calculate</button>
 ```
+クリックするとscriptのsendRequest関数が実行される
+
 ---
