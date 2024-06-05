@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        function sendRequest() {
+            const n = document.getElementById('inputN').value;
+            fetch('/calculate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ n })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = `Lucas数 L${n} = ${data.result}`;
+                document.getElementById('time').innerText = `処理時間: ${(data.process_time / 1000).toFixed(3)}秒`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+
+    <input type="number" id="inputN" placeholder="Enter a number">
+    <button onclick="sendRequest()">Calculate</button>
+    <div id="result"></div>
+    <div id="time"></div>
+</body>
+</html>
