@@ -15,7 +15,16 @@ node src/app.js
 http://localhost:3000
 ```
 ------------------------------------------
-transfer logic to backend 
+
+logic transfer前後でファイル構成は変化しない
+
+```
+project-root
+├── public
+│   └── index.html　　
+├── app.js
+├── package.json
+```
 
 
 
