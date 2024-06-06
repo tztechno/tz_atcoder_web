@@ -1,7 +1,6 @@
-
-
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
+import time
 
 def lucas_number(n):
     if n == 0:
@@ -18,9 +17,14 @@ class RequestHandler(BaseHTTPRequestHandler):
             data = json.loads(post_data.decode('utf-8'))
             if 'n' in data:
                 n = int(data['n'])
+                
+                start_time = time.time()  # 計測開始
                 result = lucas_number(n)
-                process_time = 0  # 実行時間を計測する機能はまだ追加されていません
+                end_time = time.time()  # 計測終了
+                
+                process_time = end_time - start_time  # 実行時間を計算
                 response = json.dumps({'result': result, 'process_time': process_time})
+                
                 self.send_response(200)
                 self.send_header('Content-Type', 'application/json')
                 self.end_headers()
@@ -55,6 +59,7 @@ def run(server_class=HTTPServer, handler_class=RequestHandler, port=8000):
 
 if __name__ == '__main__':
     run()
+
 # python server.py
 # http://127.0.0.1:8000/
 # http://localhost:8000/
