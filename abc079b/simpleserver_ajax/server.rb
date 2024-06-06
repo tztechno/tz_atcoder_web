@@ -12,11 +12,14 @@ server = WEBrick::HTTPServer.new(:Port => 8000)
 server.mount_proc '/calculate' do |req, res|
   if req.request_method == 'POST'
     data = JSON.parse(req.body)
-    p req.path # デバッグ用：リクエストパスを表示
     if data['n']
       n = data['n'].to_i
+
+      start_time = Time.now  # 計測開始
       result = lucas_number(n)
-      process_time = 0  # 実行時間を計測する機能はまだ追加されていません
+      end_time = Time.now  # 計測終了
+
+      process_time = end_time - start_time  # 実行時間を計算
       res['Content-Type'] = 'application/json'
       res.body = { result: result, process_time: process_time.round(3) }.to_json
     else
@@ -37,6 +40,7 @@ end
 trap 'INT' do server.shutdown end
 
 server.start
+
 
 
 
