@@ -34,10 +34,11 @@ your-project
 │   └── index.html
 └── ...
 ```
+```
 main.goの修正
 cd myapp
 go run main.go
-
+```
 ---
 
 # backend分離作業,失敗
