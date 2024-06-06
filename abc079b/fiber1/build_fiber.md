@@ -13,6 +13,7 @@ Fiber install 成功
 
 go run main.go
 http://127.0.0.1:3000 
+```
 
 # Hello world表示成功
 
