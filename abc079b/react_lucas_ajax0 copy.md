@@ -134,3 +134,22 @@ node server.js
 http://localhost:3000
 
 $$$$$$$$$$$$$$$$$$$$
+
+```
+my-app/
+│
+├── public/
+│   ├── ajax.html
+│   ├── index.html
+│   └── static.html
+│
+├── src/
+│   ├── Home.js
+│   └── App.js
+│
+├── server.js
+├── package.json
+└── (その他の構成ファイル)
+
+
+```
