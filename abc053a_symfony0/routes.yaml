@@ -1,7 +1,0 @@
-controllers:
-    resource: ../src/Controller/
-    type: attribute
-
-abc053a:
-    path: /abc053a
-    controller: App\Controller\Abc053aController::index
