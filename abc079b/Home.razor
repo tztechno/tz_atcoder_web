@@ -1,0 +1,45 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+@using System.Diagnostics
+
+<h3>Lucas Number</h3>
+
+<input type="number" @bind="inputN" min="1" />
+<button @onclick="Calculate">Calculate</button>
+
+<div>@result</div>
+<div>@time</div>
+
+@code {
+    private int inputN;
+    private string result;
+    private string time;
+
+    private int CalculateLucasNumber(int n)
+    {
+        if (n == 0)
+        {
+            return 2;
+        }
+        else if (n == 1)
+        {
+            return 1;
+        }
+        else
+        {
+            return CalculateLucasNumber(n - 1) + CalculateLucasNumber(n - 2);
+        }
+    }
+
+    private void Calculate()
+    {
+        var stopwatch = Stopwatch.StartNew();
+        var lucasNumber = CalculateLucasNumber(inputN);
+        stopwatch.Stop();
+
+        result = $"LucasNumber L{inputN} = {lucasNumber}";
+        time = $"Time: {(stopwatch.ElapsedMilliseconds / 1000.0):F3} sec";
+    }
+}
