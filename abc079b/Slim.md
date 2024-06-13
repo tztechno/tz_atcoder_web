@@ -70,6 +70,8 @@ http://localhost:8080
 これで、Slimフレームワークを使用してウェブに「Hello」を表示することができました。必要に応じて、この基本的な設定を拡張して、複雑なウェブアプリケーションを作成できます。
 
 ---
+```
 cd myapp
 php -S localhost:8080 -t public
 http://localhost:8080/ajax.html
+```
